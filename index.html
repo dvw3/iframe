@@ -28,7 +28,7 @@
 
             if (file) {
                 // Set the src attribute of the iframe to the 'file' parameter
-                document.getElementById('fileViewer').src = file;
+                document.getElementById('fileViewer').src = `https://mozilla.github.io/pdf.js/web/viewer.html?file=${file}`;
 
                 // Optionally, display the file name in the page
                 document.getElementById('fileName').innerText = `File loaded: ${file}`;
