@@ -14,7 +14,21 @@
             height: 600px;
             border: 1px solid #ccc;
         }
+        /* Add the CSS for the textLayer class */
+        .disable-pointer-events {
+            pointer-events: none !important;
+            
+        }
     </style>
+    <script type="text/javascript">
+      // When a message is received from the page code
+      window.onmessage = (event) => {
+        if (event.data) {
+          document.getElementById("message").innerHTML = event.data;
+          document.getElementById('fileViewer').style.visibility = 'hidden'; 
+        }
+      };      
+    </script>
     <script>
         // Function to get the URL parameters
         function getUrlParameter(name) {
@@ -29,27 +43,21 @@
             if (file) {
                 // Set the src attribute of the iframe to the 'file' parameter
                 document.getElementById('fileViewer').src = `https://mozilla.github.io/pdf.js/web/viewer.html?file=${file}`;
-
-                // Optionally, display the file name in the page
-                document.getElementById('fileName').innerText = `File loaded: ${file}`;
+                //document.getElementById('fileViewer').classList.add('disable-pointer-events');
             } else {
                 // Display a message if no file parameter is provided
-                document.getElementById('fileName').innerText = "No file parameter provided.";
-            }
+                document.getElementById('fileViewer').style.visibility = 'hidden';
+            }            
         };
     </script>
 </head>
 <body>
 
-    <div class="container">
-        <h1>File Viewer</h1>
-        <p id="fileName">Loading file...</p>
-
+    <div id="message"  class="container">
         <!-- Iframe where the file will be loaded -->
         <iframe id="fileViewer" src="" title="File Viewer">
             Your browser does not support iframes.
         </iframe>
     </div>
-
 </body>
 </html>
