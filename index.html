@@ -1,44 +1,55 @@
-<html>
-  <head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Load File from URL Parameter</title>
     <style>
-      .bigText {
-        font-family: 'Arial';
-        font-size: 24px;
-        color: black;
-      }
-      .mediumText {
-        font-family: 'Arial';
-        font-size: 18px;
-        color: black;
-      }
-      .button {
-        border: none;
-        color: white;
-        padding: 15px 32px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
-        cursor: pointer;
-        background-color: blue
-	  }
-    </style>
-    
-    <script type="text/javascript">
-      // When a message is received from the page code
-      window.onmessage = (event) => {
-        if (event.data) {
-          document.getElementById("message").innerHTML = event.data; 
+        .container {
+            margin: 20px;
+            font-family: Arial, sans-serif;
         }
-      };
-      
-    </script>
-  </head>
-  
-  <body>
-      	<div id="message" class="mediumText">MESSAGE FROM PAGE WILL SHOW HERE</div>
-        <iframe src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://download-files.wixmp.com/ugd/5ffa78_5bb2e5df1a1d49da9e340c3b9134ea90.pdf?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ1cm46YXBwOmU2NjYzMGU3MTRmMDQ5MGFhZWExZjE0OWIzYjY5ZTMyIiwic3ViIjoidXJuOmFwcDplNjY2MzBlNzE0ZjA0OTBhYWVhMWYxNDliM2I2OWUzMiIsImF1ZCI6WyJ1cm46c2VydmljZTpmaWxlLmRvd25sb2FkIl0sImlhdCI6MTcyNzQzNzEzMSwiZXhwIjoxNzI3NDczMTQxLCJqdGkiOiIyMDEzZmNjZC01NDhkLTRhODktYjYwMC1kZTA2MTM4M2IxZmQiLCJvYmoiOltbeyJwYXRoIjoiL3VnZC81ZmZhNzhfNWJiMmU1ZGYxYTFkNDlkYTllMzQwYzNiOTEzNGVhOTAucGRmIn1dXSwiZGlzIjp7ImZpbGVuYW1lIjoiQWxlIHByZXNlbnRhY2lvbi5wZGYiLCJ0eXBlIjoiYXR0YWNobWVudCJ9fQ.Kq8no33NI4El6PRshtpcsbAmyHthR_enx2kfC6I4f7U">Test</iframe>
+        iframe {
+            width: 100%;
+            height: 600px;
+            border: 1px solid #ccc;
+        }
+    </style>
+    <script>
+        // Function to get the URL parameters
+        function getUrlParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
 
-  </body>
+        // When the page loads
+        window.onload = function() {
+            const file = getUrlParameter('file'); // Get 'file' parameter from the URL
+
+            if (file) {
+                // Set the src attribute of the iframe to the 'file' parameter
+                document.getElementById('fileViewer').src = file;
+
+                // Optionally, display the file name in the page
+                document.getElementById('fileName').innerText = `File loaded: ${file}`;
+            } else {
+                // Display a message if no file parameter is provided
+                document.getElementById('fileName').innerText = "No file parameter provided.";
+            }
+        };
+    </script>
+</head>
+<body>
+
+    <div class="container">
+        <h1>File Viewer</h1>
+        <p id="fileName">Loading file...</p>
+
+        <!-- Iframe where the file will be loaded -->
+        <iframe id="fileViewer" src="" title="File Viewer">
+            Your browser does not support iframes.
+        </iframe>
+    </div>
+
+</body>
 </html>
