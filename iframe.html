@@ -1,0 +1,43 @@
+<html>
+  <head>
+    <style>
+      .bigText {
+        font-family: 'Arial';
+        font-size: 24px;
+        color: black;
+      }
+      .mediumText {
+        font-family: 'Arial';
+        font-size: 18px;
+        color: black;
+      }
+      .button {
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        background-color: blue
+	  }
+    </style>
+    
+    <script type="text/javascript">
+      // When a message is received from the page code
+      window.onmessage = (event) => {
+        if (event.data) {
+          document.getElementById("message").innerHTML = event.data; 
+        }
+      };
+      
+    </script>
+  </head>
+  
+  <body>
+      	<div id="message" class="mediumText">MESSAGE FROM PAGE WILL SHOW HERE</div>
+
+  </body>
+</html>
